@@ -1,84 +1,82 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 import javax.servlet.http.HttpSession;
 
-public class RegisterStudent extends HttpServlet {
-    
+public class LeaveApply extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            String sname = request.getParameter("sname");
-            int rollno = Integer.parseInt(request.getParameter("rollno"));
-            int prn = Integer.parseInt(request.getParameter("prn"));
-            long contact = Long.parseLong(request.getParameter("contact"));
-            String branch = request.getParameter("branch");
-            String semail = request.getParameter("semail");
-            String password = request.getParameter("pwd1");
-            String rdate = request.getParameter("rdate");
-            String year = request.getParameter("year");
 
-            
+            PreparedStatement st = null;
             Connection c1 = null;
+            int applicationid = Integer.parseInt(request.getParameter("applicationid"));
+            String name = request.getParameter("sname");
+            String leavetype = request.getParameter("leavetype");
+            String applicationdate = request.getParameter("applicationdate");
+            int prn = Integer.parseInt(request.getParameter("prn"));
+            String branch = request.getParameter("branch");
+            long contact = Long.parseLong(request.getParameter("contact"));
+            String email = request.getParameter("email");
+            String leavefrom = request.getParameter("leavefrom");
+            String leaveto = request.getParameter("leaveto");
+            String reason = request.getParameter("reason");
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                PreparedStatement st = c1.prepareStatement("insert into student(name,rollno,prn,contact,branch,year,semail,password,rdate) values(?,?,?,?,?,?,?,?,?);");
-                st.setString(1, sname);
-                st.setInt(2, rollno);
-                st.setInt(3, prn);
-                st.setLong(4, contact);
+                //out.println("Database Connected Succesfully");
+
+                st = c1.prepareStatement("insert into leaveapplications values(?,?,?,?,?,?,?,?,?,?,?,'');");
+                st.setInt(1, applicationid);
+                st.setString(2, applicationdate);
+                st.setString(3, name);
+                st.setInt(4, prn);
                 st.setString(5, branch);
-                st.setString(6, year);
-                st.setString(7, semail);
-                st.setString(8, password);
-                st.setString(9, rdate);
+                st.setLong(6, contact);
+                st.setString(7, email);
+                st.setString(8, leavetype);
+                st.setString(9, leavefrom);
+                st.setString(10, leaveto);
+                st.setString(11, reason);
 
                 int r = st.executeUpdate();
                 if (r > 0) {
                     c1.close();
-                    // using session 
+                    //out.print("addd");
                     HttpSession s1 = request.getSession(true);
                     s1.setAttribute("status", "success");
-                    response.sendRedirect("studentRegister.jsp");
-                   
-                    // using RequestDispatcher but RequestDispatcher might cause Exception
-                   /* request.setAttribute("status","success");
-                    rd = request.getRequestDispatcher("/studentRegister.jsp");
-                    rd.forward(request, response);*/
-                    //c1.close();
-                } 
+                    response.sendRedirect("leaveApplication.jsp");
+
+                }
                 c1.close();
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | SQLException e) {
                 try {
                     c1.close();
+                    //out.print("fail");
                     HttpSession s1 = request.getSession(true);
                     s1.setAttribute("status", "failed");
-                    response.sendRedirect("studentRegister.jsp");
+                    response.sendRedirect("leaveApplication.jsp");
                 } catch (SQLException ex) {
-                    Logger.getLogger(RegisterStudent.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LeaveApply.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("studentRegister.jsp");
+
             }
 
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

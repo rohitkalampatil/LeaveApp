@@ -28,6 +28,10 @@
         <servlet-name>LoginStudent</servlet-name>
         <servlet-class>LoginStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeaveApply</servlet-name>
+        <servlet-class>LeaveApply</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LoginStudent</servlet-name>
         <url-pattern>/LoginStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LeaveApply</servlet-name>
+        <url-pattern>/LeaveApply</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

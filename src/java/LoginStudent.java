@@ -30,7 +30,7 @@ public class LoginStudent extends HttpServlet {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                PreparedStatement st = c1.prepareStatement("select password,semail,name from student where prn=?");
+                PreparedStatement st = c1.prepareStatement("select contact,password,semail,name,branch from student where prn=?");
                 st.setInt(1, prn);
 
                 ResultSet r = st.executeQuery();
@@ -38,10 +38,13 @@ public class LoginStudent extends HttpServlet {
                     if (password.equals(r.getString("password"))) {
                         String email = r.getString("semail");
                         String name = r.getString("name");
-
+                        String branch=r.getString("branch");
+                        long contact=r.getLong("contact");
                         s1.setAttribute("email", email);
                         s1.setAttribute("name", name);
                         s1.setAttribute("prn", prn);
+                        s1.setAttribute("branch",branch);
+                        s1.setAttribute("contact", contact);
                         response.sendRedirect("studentpanel.jsp");
                         //out.print("logged in");
                     } else {

@@ -15,12 +15,17 @@
             // can not store user data on this page ie to prevent back after logout
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             //checking for session is active or not 
-            if (session.getAttribute("prn") == null || session.getAttribute("name") == null || session.getAttribute("email") == null) {
+            
+            if (session.getAttribute("prn") == null ) {
+                //checking only prn cause if prn gets nulll it will not check further for true
+                
                 response.sendRedirect("studentLogin.jsp");
             } else {
                 String name = (String) session.getAttribute("name");
                 String email = (String) session.getAttribute("email");
-                int prn = Integer.parseInt(session.getAttribute("prn").toString());
+                
+                // right now we dont need prn value on thid page isted of delete im commenting
+                //int prn = Integer.parseInt(session.getAttribute("prn").toString());
         %>
         <header>
             <nav class="fixed px-4 lg:px-6 py-2.5 top-0 z-50 w-full bg-white shadow border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -88,12 +93,16 @@
 
                 <!--button for new application-->
                 <div class="flex items-center justify-center">
-                    <button data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+                    <a href="leaveApplication.jsp" data-tooltip-target="tooltip-new" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                         </svg>
                         <span class="sr-only">New item</span>
-                    </button>
+                    </a>
+                    <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        New Application
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
                 </div>
                 <!--setting button-->
                 <button id="settingDropdownButton" data-dropdown-toggle="settingDropdown"  type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
@@ -117,7 +126,7 @@
                     </svg>
                     <span class="sr-only">Profile</span>
                 </button>
-                <!--                        user menu drawer-->
+                <!--user menu drawer-->
                 <div class="z-50 hidden my-4 w-44 text-base list-none bg-gray-200 divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                     <div class="px-4 py-3" role="none">
                         <p class="text-sm text-black dark:text-white" role="none">

@@ -172,18 +172,15 @@
                 </ul>
             </div>
         </aside>
-
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
-
                     <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">My Profile</h2>
                     <form action="Update" method="POST">
                         <div class="sm:col-span-2 pb-4">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                             <input type="text" value="<%= hodname%>" name="hodname" maxlength="30" minlength="3" onkeyup="this.value = this.value.replace(/[^a-zA-Z ]/g, '')" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type your name" required="">
                         </div>
-
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 pb-4">
                             <div class="w-full">
                                 <label for="userid"   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Userid</label>
@@ -191,13 +188,10 @@
                             </div>
                             <div>
                                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Branch</label>
-
                                 <input type="text" readonly="true" value="<%= branch%>"  name="branch"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-
                             </div>
                         </div>
                         <input type="button" value="Update" data-modal-toggle="updateModal" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-
                         <div id="updateModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                                 <!-- Modal content -->
@@ -206,18 +200,15 @@
                                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                         <span class="sr-only">Close modal</span>
                                     </button>
-
                                     <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
                                     </svg>
-
                                     <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to update your account?</p>
                                     <div class="flex justify-center items-center space-x-4">
                                         <button data-modal-toggle="updateModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                                             No, cancel
                                         </button>
                                         <input type="submit" value="Yes, I'm sure" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-
                                         </input>
                                     </div>
                                 </div>
@@ -246,7 +237,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
         <%
             }
@@ -256,19 +246,15 @@
                 var status = '<%= session.getAttribute("status")%>';
                 if (status === "success") {
                     document.getElementById('successButton').click();
-            <% session.setAttribute("status", null);%>
-
                 }
                 if (status === "failed") {
                     alert("failed to update student");
-            <% session.setAttribute("status", null);%>
-
                 }
             }
         </script>
-
         <script>
             window.onload = alertNamefun;
         </script>
+        <% session.setAttribute("status", null);%>
     </body>
 </html>

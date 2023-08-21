@@ -1,7 +1,5 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"  %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,53 +8,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
-
         <title>Dashboard - </title>
-
     </head>
     <body>
-
-        <%
+        <%  //to prevent back after login
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-
             if (session.getAttribute("branch") == null || session.getAttribute("hodname") == null || session.getAttribute("userid") == null) {
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String hodname = (String) session.getAttribute("hodname");
-        %>  
-        <%!
-            int prn = 0, rollno = 0, c = 0;
+                int prn = 0, rollno = 0, c = 0;
+                Statement st = null;
+                Connection c1 = null;
+                String q = "";
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                    st = c1.createStatement();
+                    q = "select max(applicationid) from leaveapplications;";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("max(applicationid)");
+                } catch (Exception e) {
+                }
         %>
-        <%
-            Statement st = null;
-            Connection c1 = null;
-            String q = "";
-
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-
-                q = "select max(applicationid) from leaveapplications;";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("max(applicationid)");
-
-            } catch (Exception e) {
-
-            }
-
-        %>
-
-
         <%-- ----------------------- Navigationn Bar ---------------------------------%>
-
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
-
                     <%-- ----------------------- SideBar Button ---------------------------------%> 
-
                     <div class="flex items-center justify-start">
                         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <span class="sr-only">Open sidebar</span>
@@ -69,9 +50,7 @@
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">LeaveApp</span>
                         </a>
                     </div>
-
                     <%-- ----------------------- Profile Button ---------------------------------%>
-
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
                             <div>
@@ -95,7 +74,6 @@
                                     <li>
                                         <a href="hodProfile.jsp" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">My Profile</a>
                                     </li>
-
                                     <li>
                                         <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex text-sm text-gray-700 items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Setting<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -110,7 +88,6 @@
                                             </ul>
                                         </div>
                                     </li>
-
                                     <li>
                                         <a href="Logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                                     </li>
@@ -121,9 +98,7 @@
                 </div>
             </div>
         </nav>
-
         <%------------------------------------------------ Side Navigation bar -----------------------------------------------%>
-
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
@@ -136,7 +111,6 @@
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
-
                     <li>
                         <a href="inbox.jsp" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -163,10 +137,7 @@
                             <span class="flex-1 ml-3 whitespace-nowrap">Add New Students</span>
                         </a>
                     </li>
-
-
                 </ul>
-
                 <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -185,7 +156,6 @@
                 </ul>
             </div>
         </aside>
-
         <%--///////////////////    Registration field    ////////////////////--%>
         <%
             String qq = "";
@@ -196,18 +166,11 @@
                 prn = rr.getInt("max(prn)") + 1;
                 rollno = rr.getInt("max(rollno)") + 1;
             } catch (Exception ex) {
-
             }
-
         %>
-
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-
-
-                <%-- /////////////////    Registration Form    ////////////////////
-                <input type="hidden" id="status" value="${status}">--%>
-
+                <%-- /////////////////    Registration Form    //////////////////// --%>
                 <form method="POST" action="RegisterStudent" >
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
@@ -220,7 +183,6 @@
                         </div>
                     </div>
                     <%--------    roll no and prn   -----------%>
-
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="number" name="prn" id="prn" value="<%= prn%>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " readonly="true" />
@@ -231,23 +193,17 @@
                             <label for="rollno" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Roll No</label>
                         </div>
                     </div>
-
                     <%--------    sname   -----------%>
-
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="text" name="sname" id="sname" onkeyup="this.value = this.value.replace(/[^a-zA-Z ]/g, '')" maxlength="50" minlength="3" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="sname" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Student Name</label>
                     </div>
-
                     <%--------    semail   -----------%>
-
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="email" name="semail" pattern="^[a-zA-Z0-9._]+@gmail\.com$" id="semail" maxlength="80"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="semail" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
                     </div>
-
                     <%--        contact and year               --%>
-
                     <div class="grid pb-2 md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="tel"  name="contact" onkeyup="this.value = this.value.replace(/[^0-9]/g, '')" id="contact" maxlength="10" minlength="10" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -262,9 +218,7 @@
                             </select>
                         </div>
                     </div>
-
                     <%--      Branch     --%>
-
                     <div class="grid pb-2 md:grid-cols-3 md:gap-8">
                         <div class="flex items-center pl-4 mb-4 border border-gray-200 rounded dark:border-gray-700">
                             <input required="" id="branch-1" type="radio" value="bcs" name="branch" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -279,9 +233,7 @@
                             <label for="branch-3" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">B.Sc.IT</label>
                         </div>
                     </div>
-
                     <%--      password     --%>
-
                     <div class="grid  md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="password" name="pwd1" id="pwd1" maxlength="8" minlength="4"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -292,7 +244,6 @@
                             <label for="pwd2" id="pass2" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
                         </div>
                     </div>
-
                     <div class="grid  md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full  group">
                             <span id="wrong_pass_alert" class="self-center text-red-600 font-semibold  dark:text-white"></span>
@@ -303,7 +254,6 @@
                     </div>
                     <script>
                         function validate_password() {
-
                             var pass = document.getElementById('pwd1').value;
                             var confirm_pass = document.getElementById('pwd2').value;
                             if (pass !== confirm_pass) {
@@ -316,12 +266,9 @@
                                 document.getElementById('pwd2').style.color = 'red';
                                 document.getElementById('pwd1').style.borderBottomColor = 'red';
                                 document.getElementById('pwd2').style.borderBottomColor = 'red';
-
                                 document.getElementById('create').disabled = true;
                                 document.getElementById('create').style.opacity = (0.4);
-
                             } else {
-
                                 document.getElementById('wrong_pass_alert').style.color = 'green';
                                 document.getElementById('wrong_pass_alert').innerHTML =
                                         'Password Matched';
@@ -331,18 +278,12 @@
                                 document.getElementById('pwd2').style.color = 'green';
                                 document.getElementById('pwd1').style.borderBottomColor = 'green';
                                 document.getElementById('pwd2').style.borderBottomColor = 'green';
-
                                 document.getElementById('create').disabled = false;
                                 document.getElementById('create').style.opacity = (1);
-
                             }
                         }
-
-
                     </script>
-
                     <input type="hidden" id="successButton" data-modal-toggle="successModal" >
-
                     <div id="successModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                             <!-- Modal content -->
@@ -362,34 +303,25 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
-
             </div>
         </div>
-        <%}
-
-        %>
-
+        <%}%>
         <script >
-
             function alertNamefun() {
-
                 var status = '<%= session.getAttribute("status")%>';
-
                 if (status === "success") {
                     document.getElementById('successButton').click();
-            <% session.setAttribute("status", null);%>
                 }
                 if (status === "failed") {
                     alert("Failed to add Student");
-            <% session.setAttribute("status", null);%>
                 }
             }
         </script>
-
         <script>
             window.onload = alertNamefun;
         </script>
+        <% session.setAttribute("status", null);
+        %>
     </body>
 </html>
