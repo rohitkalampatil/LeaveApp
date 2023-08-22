@@ -37,7 +37,7 @@ public class LeaveApply extends HttpServlet {
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                 //out.println("Database Connected Succesfully");
 
-                st = c1.prepareStatement("insert into leaveapplications values(?,?,?,?,?,?,?,?,?,?,?,'');");
+                st = c1.prepareStatement("insert into leaveapplications values(?,?,?,?,?,?,?,?,?,?,?,'pending');");
                 st.setInt(1, applicationid);
                 st.setString(2, applicationdate);
                 st.setString(3, name);

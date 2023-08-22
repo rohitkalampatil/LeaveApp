@@ -26,10 +26,10 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                     st = c1.createStatement();
-                    q = "select max(applicationid) from leaveapplications;";
-                    ResultSet r = st.executeQuery(q);
-                    r.next();
-                    c = r.getInt("max(applicationid)");
+                    q = "select count(applicationid) from leaveapplications where status='pending'";
+                ResultSet r = st.executeQuery(q);
+                r.next();
+                c = r.getInt("count(applicationid)");
                 } catch (Exception e) {
                 }
         %>
@@ -174,9 +174,9 @@
                 <form method="POST" action="RegisterStudent" >
                     <div class="grid md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
-                            <a  href="#dashboard" class="flex ml-2 md:mr-24">
+                            <p  class="flex ml-2 md:mr-24">
                                 <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Student Registration</span>
-                            </a>
+                            </p>
                         </div>
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="date" id="rdate" name="rdate" required=""  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">

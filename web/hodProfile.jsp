@@ -36,11 +36,10 @@
                 Class.forName("com.mysql.jdbc.Driver");
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                 st = c1.createStatement();
-                q = "select max(applicationid) from leaveapplications";
-
+                q = "select count(applicationid) from leaveapplications where status='pending'";
                 ResultSet r = st.executeQuery(q);
                 r.next();
-                c = r.getInt("max(applicationid)");
+                c = r.getInt("count(applicationid)");
 
                 c1.close();
 

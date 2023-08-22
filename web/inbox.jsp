@@ -32,10 +32,10 @@
                 Class.forName("com.mysql.jdbc.Driver");
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                 st = c1.createStatement();
-                q = "select max(applicationid) from leaveapplications";
+                q = "select count(applicationid) from leaveapplications where status='pending'";
                 ResultSet r = st.executeQuery(q);
                 r.next();
-                c = r.getInt("max(applicationid)");
+                c = r.getInt("count(applicationid)");
 
             } catch (Exception e) {
             }
@@ -214,14 +214,20 @@
                                     Application ID
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Action
+                                    View
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Accept
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Reject
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 try {
-                                    q = "select * from leaveapplications where branch='" + branch + "';";
+                                    q = "select * from leaveapplications where branch='" + branch + "' and status='pending';";
                                     ResultSet r = st.executeQuery(q);
                                     while (r.next()) {
                             %>
@@ -240,7 +246,25 @@
                                     <%= r.getInt("applicationid")%>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="viewApplication.jsp?appid=<%= r.getInt(1)%>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a href="leaveApplicationView.jsp?applicationid=<%= r.getInt(1)%>" class=" flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                        </svg>
+                                        View</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="LeaveAction?applicationid=<%= r.getInt(1)%>&status=accept" class="flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                        </svg>
+                                        Accept</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="LeaveAction?applicationid=<%= r.getInt(1)%>&status=reject" class="flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                        </svg>
+                                        Reject</a>
                                 </td>
                             </tr>
                             <%
@@ -251,6 +275,7 @@
                                 }
                             %>
                         </tbody>
+ 
                     </table>
                 </div>
             </div>
