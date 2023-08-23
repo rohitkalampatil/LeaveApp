@@ -187,7 +187,7 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
 
-                    <div class=" flex mb-4 items-center justify-between">
+                    <div class=" flex items-center mb-4 justify-between">
 
                         <div class="relative z-0  group"> 
                             <div class=" bg-white dark:bg-gray-900">
@@ -240,7 +240,8 @@
                         <tbody>
                             <%
                                 try {
-                                    q = "select * from leaveapplications where branch='" + branch + "' and status='pending';";
+                                    String status = request.getParameter("status");
+                                    q = "select * from leaveapplications where branch='" + branch + "' and status='"+status+"';";
                                     ResultSet r = st.executeQuery(q);
                                     while (r.next()) {
                             %>
