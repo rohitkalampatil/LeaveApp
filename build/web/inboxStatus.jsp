@@ -19,7 +19,7 @@
             } else {
                 String branch = (String) session.getAttribute("branch");
                 String hodname = (String) session.getAttribute("hodname");
-<<<<<<< HEAD
+
 
                 int c = 0;
 
@@ -44,40 +44,6 @@
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <%-- ----------------------- SideBar Button ---------------------------------%> 
-=======
-        %>
-        <%!
-            int c = 0;
-        %>
-        <%
-            Statement st = null;
-            Connection c1 = null;
-            String q = "";
-
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-                q = "select count(applicationid) from leaveapplications where status='pending'";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("count(applicationid)");
-
-            } catch (Exception e) {
-            }
-
-        %>
-
-
-        <%-- ----------------------- Navigationn Bar ---------------------------------%> 
-
-        <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <div class="px-3 py-3 lg:px-5 lg:pl-3">
-                <div class="flex items-center justify-between">
-
-                    <%-- ----------------------- SideBar Button ---------------------------------%> 
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     <div class="flex items-center justify-start">
                         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <span class="sr-only">Open sidebar</span>
@@ -90,13 +56,7 @@
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">LeaveApp</span>
                         </a>
                     </div>
-<<<<<<< HEAD
-                    <%-- ----------------------- Profile Button ---------------------------------%> 
-=======
 
-                    <%-- ----------------------- Profile Button ---------------------------------%> 
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
                             <div>
@@ -120,10 +80,7 @@
                                     <li>
                                         <a href="hodProfile.jsp" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">My Profile</a>
                                     </li>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                                     <li>
                                         <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex text-sm text-gray-700 items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Setting<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -149,13 +106,7 @@
                 </div>
             </div>
         </nav>
-<<<<<<< HEAD
-        <%------------------------------------------------ Side Navigation bar -----------------------------------------------%>
-=======
 
-        <%------------------------------------------------ Side Navigation bar -----------------------------------------------%>
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
@@ -168,10 +119,6 @@
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     <li>
                         <a href="inbox.jsp" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -198,14 +145,8 @@
                             <span class="flex-1 ml-3 whitespace-nowrap">Add New Students</span>
                         </a>
                     </li>
-<<<<<<< HEAD
                 </ul>
-=======
-
-
                 </ul>
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                 <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -224,25 +165,14 @@
                 </ul>
             </div>
         </aside>
-<<<<<<< HEAD
-        <%------------------------------------------------ Inbox Table view -----------------------------------------------%>
-        <div id="dashboard" class="p-4 sm:ml-64">
-            <div class="p-4 border-2  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div class=" flex items-center mb-4 justify-between">
-=======
 
         <%------------------------------------------------ Inbox Table view -----------------------------------------------%>
 
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
-
                     <div class=" flex items-center mb-4 justify-between">
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
-                        <div class="relative z-0  group"> 
+                       <div class="relative z-0  group"> 
                             <div class=" bg-white dark:bg-gray-900">
                                 <label for="table-search" class="sr-only">Search</label>
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -253,10 +183,7 @@
                                 <input type="text" id="table-search" class=" w-32 p-2 pl-8  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search">
                             </div>
                         </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                         <div class="relative z-0 group">
                             <div class=" flex items-center justify-between">
                                 <a href="inboxStatus.jsp?status=accept" class="mr-1 text-white bg-green-600 hover:bg-green-800  rounded-lg text-sm p-1 ">Accepted</a>
@@ -265,17 +192,9 @@
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-=======
-
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                                 <th scope="col" class="px-6 py-3">
                                     Student name
                                 </th>
@@ -303,11 +222,7 @@
                             <%
                                 try {
                                     String status = request.getParameter("status");
-<<<<<<< HEAD
-                                    q = "select * from leaveapplications where branch='" + branch + "' and status='" + status + "';";
-=======
                                     q = "select * from leaveapplications where branch='" + branch + "' and status='"+status+"';";
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                                     ResultSet r = st.executeQuery(q);
                                     while (r.next()) {
                             %>
@@ -355,10 +270,6 @@
                                 }
                             %>
                         </tbody>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     </table>
                 </div>
             </div>

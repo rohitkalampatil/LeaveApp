@@ -22,29 +22,26 @@
                 String hodname = (String) session.getAttribute("hodname");
                 String branch = (String) session.getAttribute("branch");
                 String sub1 = "", sub2 = "";
-        %>  
-        <%!
-            // counter variable to store no of applications in database
-            int c = 0;
-        %>
-        <%
-            Statement st = null;
-            Connection c1 = null;
-            String q = "";
+// counter variable to store no of applications in database
+                int c = 0;
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-                q = "select count(applicationid) from leaveapplications where status='pending'";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("count(applicationid)");
+                Statement st = null;
+                Connection c1 = null;
+                String q = "";
 
-                c1.close();
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                    st = c1.createStatement();
+                    q = "select count(applicationid) from leaveapplications where status='pending'";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("count(applicationid)");
 
-            } catch (Exception e) {
-            }
+                    c1.close();
+
+                } catch (Exception e) {
+                }
         %>
         <%-- ----------------------- Navigationn Bar ---------------------------------%>
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">

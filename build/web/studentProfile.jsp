@@ -11,23 +11,7 @@
         <title>Students - panel</title>
 
         <style>
-<<<<<<< HEAD
-             .profile-card {
-=======
-            /*            body {
-                            font-family: Arial, sans-serif;
-                            margin: 0;
-                            padding: 0;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            min-height: 100vh;
-                            background-color: #f4f4f4;
-                        }*/
-
             .profile-card {
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
-
                 background-color: white;
                 padding: 20px;
                 border-radius: 8px;
@@ -165,10 +149,7 @@
                             </li>
                         </ul>
                     </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                 </div>
             </nav>
         </header>
@@ -184,16 +165,13 @@
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="profile-card">
-<<<<<<< HEAD
-=======
 
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     <%
                         Connection c1 = null;
                         PreparedStatement st = null;
-                        String branch="",year="";
-                        int rollno=0;
-                        long contact=0;
+                        String branch = "", year = "";
+                        int rollno = 0;
+                        long contact = 0;
 
                         try {
                             Class.forName("com.mysql.jdbc.Driver");
@@ -211,15 +189,8 @@
                         } catch (Exception e) {
 
                         }
-<<<<<<< HEAD
                     %>
 
-=======
-
-                    %>
-
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     <img class="img" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" alt="Profile Picture">
                     <h4 class="text-2xl font-bold dark:text-white"><%=name%></h4>
                     <h6 class="text-lg mb-4 font-medium dark:text-white"><%= email%></h6>

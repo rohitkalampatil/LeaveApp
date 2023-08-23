@@ -238,27 +238,12 @@
                         </form>
                     </div>
                 </div>
-<<<<<<< HEAD
-=======
-                
-                
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
             </div>
         </div>
 
         <%}%>
            <script >
             function alertNamefun() {
-<<<<<<< HEAD
-=======
-
-//                setTimeout(fundiss, 2000);
-//                function fundiss() {
-//                    document.getElementById("error").innerHTML = '<%-- session.setAttribute("error", "");--%>';
-//                }
-//
-
->>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                 var status = '<%= session.getAttribute("status")%>';
 
                 if (status === "success") {
