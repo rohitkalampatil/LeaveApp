@@ -14,7 +14,7 @@
     <body>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            if (session.getAttribute("branch") == null || session.getAttribute("hodname") == null || session.getAttribute("userid") == null) {
+            if (session.getAttribute("userid") == null) {
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String branch = (String) session.getAttribute("branch");
