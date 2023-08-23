@@ -32,7 +32,11 @@
 
                 // right now we dont need prn value on thid page isted of delete im commenting
                 //int prn = Integer.parseInt(session.getAttribute("prn").toString());
+<<<<<<< HEAD
         %>
+=======
+%>
+>>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
         <header>
             <nav class="fixed px-4 lg:px-6 py-2.5 top-0 z-50 w-full bg-white shadow border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex flex-wrap justify-between items-center    ">
@@ -218,7 +222,11 @@
                                     }
                                     c1.close();
                                 } catch (Exception e) {
+<<<<<<< HEAD
 
+=======
+                                    
+>>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                                 }
                             %>
                         </tbody>

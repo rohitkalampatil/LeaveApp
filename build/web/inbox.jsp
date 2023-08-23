@@ -167,7 +167,14 @@
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<<<<<<< HEAD
                     <div class=" flex mb-4 items-center justify-between">
+=======
+
+
+                    <div class=" flex mb-4 items-center justify-between">
+
+>>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                         <div class="relative z-0  group"> 
                             <div class=" bg-white dark:bg-gray-900">
                                 <label for="table-search" class="sr-only">Search</label>
@@ -179,6 +186,10 @@
                                 <input type="text" id="table-search" class=" w-32 p-2 pl-8  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search">
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                         <div class="relative z-0 group">
                             <div class=" flex items-center justify-between">
                                 <a href="inboxStatus.jsp?status=accept" class="mr-1 text-white bg-green-600 hover:bg-green-800  rounded-lg text-sm p-1 ">Accepted</a>
@@ -187,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -264,6 +276,10 @@
                                 }
                             %>
                         </tbody>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4430194ce0039afe19f7f00cdfb0ff417f2d4e1c
                     </table>
                 </div>
             </div>
