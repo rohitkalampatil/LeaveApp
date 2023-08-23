@@ -15,7 +15,7 @@
         <%  //   no chache stored, page will not display after logout
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
-            if (session.getAttribute("branch") == null || session.getAttribute("hodname") == null || session.getAttribute("userid") == null) {
+            if (session.getAttribute("userid") == null) {
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String hodname = (String) session.getAttribute("hodname");
@@ -37,15 +37,11 @@
                 } catch (Exception e) {
                 }
         %>
-
         <%-- ----------------------- Navigationn Bar ---------------------------------%>
-
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
-
                     <%-- ----------------------- SideBar Button ---------------------------------%> 
-
                     <div class="flex items-center justify-start">
                         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <span class="sr-only">Open sidebar</span>
@@ -58,7 +54,6 @@
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">LeaveApp</span>
                         </a>
                     </div>
-
                     <%-- ----------------------- Profile Button ---------------------------------%>
                     <div class="flex items-center lg:order-2">
                         <button  type="button" aria-expanded="false" data-dropdown-toggle="dropdown-user" class="inline-flex flex-col items-center justify-center px-4 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
@@ -72,11 +67,8 @@
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <%= // hod name appears dynamicaly
-                                                hodname%>
+                                        hodname%>
                             </p>
-                            <!--<p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                neil.sims@flowbite.com
-                            </p>-->
                         </div>
                         <ul class="py-1" role="none">
                             <li>
@@ -94,11 +86,9 @@
                                         <li>
                                             <a href="hodChangepass.jsp" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Change Password</a>
                                         </li>
-
                                     </ul>
                                 </div>
                             </li>
-
                             <li>
                                 <a href="Logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                             </li>
@@ -108,9 +98,7 @@
                 </div>
             </div>
         </nav>
-
         <%------------- logo-Side bar -------------------%>
-
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">

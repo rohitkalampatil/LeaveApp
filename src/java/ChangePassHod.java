@@ -24,7 +24,6 @@ public class ChangePassHod extends HttpServlet {
             String newpass = request.getParameter("pwd1");
             String confpass = request.getParameter("pwd2");
 
-            out.print("oldpass - " + oldpass + "<br>newpass - " + newpass + "<br>confirmpass - " + confpass + "<br>userid - " + userid);
             Connection c1 = null;
             PreparedStatement st = null;
             String q = "";
@@ -48,27 +47,21 @@ public class ChangePassHod extends HttpServlet {
                                 int rr = st.executeUpdate();
                                 if (rr > 0) {
                                     c1.close();
-                                    
                                     s1.setAttribute("status", "success");
-                                    //s1.setAttribute("error","pass set");
-                                    //out.print("<br>password set success");
                                     response.sendRedirect("hodChangepass.jsp");
                                 }
                             } else {
                                 s1.setAttribute("status", "failed");
-                                //out.print("<br>newpass conf pass mismatch ");
                                 s1.setAttribute("error", "New Password and Confirm Password missmatched");
                                 response.sendRedirect("hodChangepass.jsp");
                             }
                         } else {
                             s1.setAttribute("status", "failed");
-                            s1.setAttribute("error", "password must minimum 4 or max 8 charecter long");
-                            //out.print("<br>pass must need greater than 4");
+                            s1.setAttribute("error", "password must contain more than 4 charecter");
                             response.sendRedirect("hodChangepass.jsp");
                         }
                     } else {
                        s1.setAttribute("status", "failed");
-                        //out.print("<br>enter your old pass correct");
                         s1.setAttribute("error", "Wrong Old Password");
                         response.sendRedirect("hodChangepass.jsp");
                     }
