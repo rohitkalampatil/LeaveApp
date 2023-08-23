@@ -9,13 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
-
-        <title>Dashboard - Students List</title>
+        <title>Inbox</title>
     </head>
     <body>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-
             if (session.getAttribute("branch") == null || session.getAttribute("hodname") == null || session.getAttribute("userid") == null) {
                 response.sendRedirect("hodlogin.jsp");
             } else {
@@ -36,10 +34,11 @@
                     ResultSet r = st.executeQuery(q);
                     r.next();
                     c = r.getInt("count(applicationid)");
+
                 } catch (Exception e) {
                 }
         %>
-        <%-- ----------------------- Navigationn Bar ---------------------------------%>
+        <%-- ----------------------- Navigationn Bar ---------------------------------%> 
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
@@ -56,7 +55,7 @@
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">LeaveApp</span>
                         </a>
                     </div>
-                    <%-- ----------------------- Profile Button ---------------------------------%>
+                    <%-- ----------------------- Profile Button ---------------------------------%> 
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
                             <div>
@@ -80,7 +79,6 @@
                                     <li>
                                         <a href="hodProfile.jsp" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">My Profile</a>
                                     </li>
-
                                     <li>
                                         <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex text-sm text-gray-700 items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Setting<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -95,6 +93,7 @@
                                             </ul>
                                         </div>
                                     </li>
+
                                     <li>
                                         <a href="Logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                                     </li>
@@ -163,25 +162,33 @@
                 </ul>
             </div>
         </aside>
+        <%------------------------------------------------ Inbox Table view -----------------------------------------------%>
         <div id="dashboard" class="p-4 sm:ml-64">
-            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-
+            <div class="p-4 border-2  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <div class="pb-4 bg-white dark:bg-gray-900">
-                        <label for="table-search" class="sr-only">Search</label>
-                        <div class="relative mt-1">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                                </svg>
+                    <div class=" flex items-center mb-4 justify-between">
+                        <div class="relative z-0  group"> 
+                            <div class=" bg-white dark:bg-gray-900">
+                                <label for="table-search" class="sr-only">Search</label>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" id="table-search" class=" w-32 p-2 pl-8  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search">
                             </div>
-                            <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+                        </div>
+                        <div class="relative z-0 group">
+                            <div class=" flex items-center justify-between">
+                                <a href="inboxStatus.jsp?status=accept" class="mr-1 text-white bg-green-600 hover:bg-green-800  rounded-lg text-sm p-1 ">Accepted</a>
+                                <a href="inboxStatus.jsp?status=reject" class="mr-1 text-white bg-red-500 hover:bg-red-800  rounded-lg text-sm p-1  ">Rejected</a>
+
+                            </div>
                         </div>
                     </div>
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-
                                 <th scope="col" class="px-6 py-3">
                                     Student name
                                 </th>
@@ -189,30 +196,27 @@
                                     PRN
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Roll no
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     Contact
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Email
+                                    Application ID
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Branch
+                                    View
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Year
+                                    Accept
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Action
+                                    Reject
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 try {
-
-                                    q = "select * from student where branch='" + branch + "';";
+                                    String status = request.getParameter("status");
+                                    q = "select * from leaveapplications where branch='" + branch + "' and status='" + status + "';";
                                     ResultSet r = st.executeQuery(q);
                                     while (r.next()) {
                             %>
@@ -225,36 +229,39 @@
                                     <%= r.getInt("prn")%>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <%= r.getInt("rollno")%>
-                                </td>
-                                <td class="px-6 py-4">
                                     <%= r.getLong("contact")%>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <%= r.getString("semail")%>
+                                    <%= r.getInt("applicationid")%>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <%= r.getString("branch")%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%= r.getString("year")%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="studentUpdate.jsp?update=<%= r.getInt(3)%>" class="flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
-                                        <svg class="w-4 h-4 mr-2 text-green-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                                        <path d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z"/>
-                                        <path d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z"/>
+                                    <a href="leaveApplicationView.jsp?applicationid=<%= r.getInt(1)%>" class=" flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
                                         </svg>
-                                        Update</a>
+                                        View</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="LeaveAction?applicationid=<%= r.getInt(1)%>&status=accept" class="flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                        </svg>
+                                        Accept</a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="LeaveAction?applicationid=<%= r.getInt(1)%>&status=reject" class="flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                        </svg>
+                                        Reject</a>
                                 </td>
                             </tr>
                             <%
                                     }
-                                    st.close();
+                                    c1.close();
                                 } catch (Exception e) {
                                     out.println("Student Exception" + e);
                                 }
-
                             %>
                         </tbody>
                     </table>
@@ -262,8 +269,7 @@
             </div>
         </div>
 
-        <%            }
+        <%    }
         %>
-
     </body>
 </html>

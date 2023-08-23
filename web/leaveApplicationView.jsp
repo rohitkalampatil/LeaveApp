@@ -52,7 +52,7 @@
                         if (r.next()) {
 
                 %>
-                
+
                 <!--hedding-->
                 <div class="relative z-0 mb-6 w-full group">
                     <p  class="flex ml-2 justify-center">
@@ -70,7 +70,7 @@
                         </p>
                     </div>
                 </div>
-                        <!--name of college and principle-->
+                <!--name of college and principle-->
                 <div class="grid grid-cols-3  gap-6">
                     <div class="relative z-0 w-full  group">
                         <p class="mb-3 text-left flex ml-4 justify-start ">
@@ -84,7 +84,7 @@
                     <div class="relative z-0 w-full  group"></div>
                 </div>
 
-<!--subject leavetype-->
+                <!--subject leavetype-->
                 <div class="relative z-0 w-full mb-3 ml-6 group">
                     <div class="ml-6">
                         <p class=" ml-6 text-left flex justify-start ">
@@ -92,19 +92,19 @@
                         </p>
                     </div>
                 </div>
-<!--matter-->
+                <!--matter-->
                 <div class="relative z-0 w-full mb-6 ml-6 group">
                     <p class="mb-3 ml-2 text-left flex justify-start ">Rspected sir/madam,<br></p>
                     <div class="ml-6">
                         <p class=" ml-4 mr-6 ">
                             I am Student <b><% out.print(r.getString("name"));%></b> pursuing in branch <b><% out.print(r.getString("branch"));%></b> due to following 
-                            Reason <b><%out.print(r.getString("reason"));%></b> i want leave from <b><%out.print( r.getString("leavefrom"));%></b> to <b><%out.print( r.getString("leaveto"));%></b>
+                            Reason <b><%out.print(r.getString("reason"));%></b> i want leave from <b><%out.print(r.getString("leavefrom"));%></b> to <b><%out.print(r.getString("leaveto"));%></b>
                             ,Day After<b> <%out.print(r.getString("leaveto"));%></b> i will continue my Class. This is kindly request to you,i 
                             hope you will accept my Leave.
                         </p>
                     </div>
                 </div>
-<!--end-->
+                <!--end-->
                 <div class="grid grid-cols-3 gap-6">
                     <div class="relative z-0 w-full mb-6 group"></div>
                     <div class="relative z-0 w-full mb-6 group"></div>
@@ -126,8 +126,6 @@
                 %>
 
             </div>
-
         </div>    
-
     </body>
 </html>

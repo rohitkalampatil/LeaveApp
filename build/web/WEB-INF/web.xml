@@ -36,6 +36,10 @@
         <servlet-name>LeaveAction</servlet-name>
         <servlet-class>LeaveAction</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassStudent</servlet-name>
+        <servlet-class>ChangePassStudent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>LeaveAction</servlet-name>
         <url-pattern>/LeaveAction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassStudent</servlet-name>
+        <url-pattern>/ChangePassStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

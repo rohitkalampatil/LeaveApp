@@ -23,6 +23,12 @@
             } else {
                 String name = (String) session.getAttribute("name");
                 String email = (String) session.getAttribute("email");
+                int prn = Integer.parseInt(session.getAttribute("prn").toString());
+                PreparedStatement st = null;
+                Connection c1 = null;
+
+                String status = request.getParameter("status");
+                // out.print(""+prn);
 
                 // right now we dont need prn value on thid page isted of delete im commenting
                 //int prn = Integer.parseInt(session.getAttribute("prn").toString());
@@ -147,7 +153,77 @@
         <!--demo content-->
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="relative z-0 w-full mb-6 group">
+                        <p  class="flex ml-2 md:mr-24">
+                            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"><%=status%>ed Applications</span>
+                        </p>
+                    </div>
+                    <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
 
+                                <th scope="col" class="px-6 py-3">
+                                    Student name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    PRN
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Contact
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Application ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    View
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                try {
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+
+                                    st = c1.prepareStatement("select * from leaveapplications where prn=? and status=?");
+                                    st.setInt(1, prn);
+                                    st.setString(2, status);
+                                    ResultSet r = st.executeQuery();
+                                    while (r.next()) {
+                            %>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <%= r.getString("name")%>
+                                </th>
+                                <td class="px-6 py-4">
+                                    <%= r.getInt("prn")%>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <%= r.getLong("contact")%>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <%= r.getInt("applicationid")%>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="leaveApplicationView.jsp?applicationid=<%= r.getInt(1)%>" class=" flex font-medium text-blue-400 dark:text-blue-500 hover:underline">
+                                        <svg class="w-4 h-4 mr-2 text-blue-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                        </svg>
+                                        View</a>
+                                </td>
+                            </tr>
+                            <%
+                                    }
+                                    c1.close();
+                                } catch (Exception e) {
+
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

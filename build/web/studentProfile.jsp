@@ -9,6 +9,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
         <link rel="icon" type="image/png" href="logo.png"/>
         <title>Students - panel</title>
+
+        <style>
+             .profile-card {
+
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 20px;
+            }
+
+        </style>
     </head>
     <body>
         <%
@@ -23,7 +41,7 @@
             } else {
                 String name = (String) session.getAttribute("name");
                 String email = (String) session.getAttribute("email");
-
+                int prn = Integer.parseInt(session.getAttribute("prn").toString());
                 // right now we dont need prn value on thid page isted of delete im commenting
                 //int prn = Integer.parseInt(session.getAttribute("prn").toString());
         %>
@@ -132,7 +150,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </nav>
         </header>
@@ -140,14 +157,56 @@
         <!--side bar--> 
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-                <!--students side elements like college notice board syllabousall stuff-->
+                <!--students side elements like college notice board syllabus all stuff-->
             </div>
         </aside>                
 
         <!--demo content-->
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+                <div class="profile-card">
+                    <%
+                        Connection c1 = null;
+                        PreparedStatement st = null;
+                        String branch="",year="";
+                        int rollno=0;
+                        long contact=0;
 
+                        try {
+                            Class.forName("com.mysql.jdbc.Driver");
+                            c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                            //out.print("connected");
+                            st = c1.prepareStatement("select branch,year,contact,rollno from student where prn=?");
+                            st.setInt(1, prn);
+                            ResultSet r = st.executeQuery();
+                            if (r.next()) {
+                                branch = r.getString("branch");
+                                year = r.getString("year");
+                                rollno = r.getInt("rollno");
+                                contact = r.getLong("contact");
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    %>
+
+                    <img class="img" src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg" alt="Profile Picture">
+                    <h4 class="text-2xl font-bold dark:text-white"><%=name%></h4>
+                    <h6 class="text-lg mb-4 font-medium dark:text-white"><%= email%></h6>
+                    <hr class="mb-3">
+
+                    <h6 class="text-md font-bold dark:text-white">Education</h6>
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400"><%= branch%></p>
+                    <h6 class="text-md font-bold dark:text-white">Year</h6>
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400"><%= year%></p>
+                    <h6 class="text-md font-bold dark:text-white">PRN</h6>
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400"><%= prn%></p>
+                    <h6 class="text-md font-bold dark:text-white">Roll no</h6>
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400"><%=rollno%></p>
+                    <h6 class="text-md font-bold dark:text-white">Contact</h6>
+                    <p class="mb-3 text-sm text-gray-600 dark:text-gray-400"><%=contact%></p>
+
+                </div>
             </div>
         </div>
 

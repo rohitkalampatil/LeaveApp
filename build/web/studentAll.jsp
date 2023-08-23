@@ -21,35 +21,29 @@
             } else {
                 String branch = (String) session.getAttribute("branch");
                 String hodname = (String) session.getAttribute("hodname");
-        %>  
-        <%!
-            int c = 0;
-        %>
-        <%
-            Statement st = null;
-            Connection c1 = null;
-            String q = "";
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-                q = "select count(applicationid) from leaveapplications where status='pending'";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("count(applicationid)");
-            } catch (Exception e) {
-            }
+                int c = 0;
 
+                Statement st = null;
+                Connection c1 = null;
+                String q = "";
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                    st = c1.createStatement();
+                    q = "select count(applicationid) from leaveapplications where status='pending'";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("count(applicationid)");
+                } catch (Exception e) {
+                }
         %>
         <%-- ----------------------- Navigationn Bar ---------------------------------%>
-
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
-
                     <%-- ----------------------- SideBar Button ---------------------------------%> 
-
                     <div class="flex items-center justify-start">
                         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <span class="sr-only">Open sidebar</span>
@@ -62,9 +56,7 @@
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">LeaveApp</span>
                         </a>
                     </div>
-
                     <%-- ----------------------- Profile Button ---------------------------------%>
-
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
                             <div>
@@ -113,9 +105,7 @@
                 </div>
             </div>
         </nav>
-
         <%------------------------------------------------ Side Navigation bar -----------------------------------------------%>
-
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
@@ -128,7 +118,6 @@
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
-
                     <li>
                         <a href="inbox.jsp" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -155,10 +144,7 @@
                             <span class="flex-1 ml-3 whitespace-nowrap">Add New Students</span>
                         </a>
                     </li>
-
-
                 </ul>
-
                 <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -269,13 +255,10 @@
                                     out.println("Student Exception" + e);
                                 }
 
-
                             %>
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
         </div>
 

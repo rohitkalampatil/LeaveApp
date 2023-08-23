@@ -21,27 +21,23 @@
                 String userid = (String) session.getAttribute("userid");
                 String hodname = (String) session.getAttribute("hodname");
                 //session.setAttribute("userid", userid);
+                // counter variable to store no of applications in database
+                int c = 0;
+                Statement st = null;
+                Connection c1 = null;
+                String q = "";
 
-        %>  
-        <%!
-            // counter variable to store no of applications in database
-            int c = 0;
-        %>
-        <%  Statement st = null;
-            Connection c1 = null;
-            String q = "";
-
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-                q = "select count(applicationid) from leaveapplications where status='pending'";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("count(applicationid)");
-                c1.close();
-            } catch (Exception e) {
-            }
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                    st = c1.createStatement();
+                    q = "select count(applicationid) from leaveapplications where status='pending'";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("count(applicationid)");
+                    c1.close();
+                } catch (Exception e) {
+                }
         %>
         <%-- ----------------------- Navigationn Bar ---------------------------------%>
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -174,15 +170,9 @@
                 </ul>
             </div>
         </aside>
-
-
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-
-
-
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-
                     <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
                         <h2 class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Change Password
@@ -247,7 +237,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div id="failedModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                                 <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                                     <!-- Modal content -->
@@ -268,35 +257,17 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
         <%
             }
         %>
 
         <script >
             function alertNamefun() {
-
-//                setTimeout(fundiss, 2000);
-//                function fundiss() {
-//                    document.getElementById("error").innerHTML = '<%-- session.setAttribute("error", "");--%>';
-//                }
-//
 
                 var status = '<%= session.getAttribute("status")%>';
 
