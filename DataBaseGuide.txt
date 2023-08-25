@@ -1,0 +1,100 @@
+-----------------------------------------------------------------------------------------
+LeaveApp follow following cammandsto setup database for this project
+-----------------------------------------------------------------------------------------
+
+--->open mysql and fire first cammand
+
+mysql> create database studentapp;
+
+--->then type usedatabse cammand 
+
+mysql> use studentapp;
+
+--->use following cammand to add hod table to your database
+
+mysql> create table hod(hodname varchar(30), userid varchar(30) primary key, password varchar(30), branch varchar(30));
+
+--->enter,to see your table details enter following cammand
+
+mysql> desc table;
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| hodname  | varchar(30) | YES  |     | NULL    |       |
+| userid   | varchar(16) | NO   | PRI | NULL    |       |
+| password | varchar(8)  | YES  |     | NULL    |       |
+| branch   | varchar(30) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+--->add some hod login details 
+
+mysql> insert into hod values('bcs','bcs','bcs','bcs');
+
+--->then create student name table to store students details
+
+mysql> create table student(name varchar(30), rollno int(11), prn int(11) primary key, contact bigint(20), branch varchar(30), year varchar(30), semail varchar(30), password varchar(12), rdate varchar(30));
+
+--->enter,to see table details enter desc cammand
+
+mysql> desc student;
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| name     | varchar(30) | YES  |     | NULL    |       |
+| rollno   | int(11)     | YES  |     | NULL    |       |
+| prn      | int(11)     | NO   | PRI | NULL    |       |
+| contact  | bigint(20)  | YES  |     | NULL    |       |
+| branch   | varchar(30) | YES  |     | NULL    |       |
+| year     | varchar(30) | YES  |     | NULL    |       |
+| semail   | varchar(30) | YES  |     | NULL    |       |
+| password | varchar(12) | YES  |     | NULL    |       |
+| rdate    | varchar(30) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+9 rows in set (0.03 sec)
+
+
+
+--->now create leaveapplications table to store leave requests
+
+mysql> create table leaveapplications( applicationid int(11) primary key,applicationdate varchar(30),name varchar(30),prn int(11), branch varchar(30), contact bigint(20), semail varchar(30), leavetype varchar(30),leavefrom varchar(30),leaveto varchar(30),reason varchar(150),status varchar(30));
+
+--->hit enter ,and type desc student to see details
+
+mysql> desc leaveapplications;
+
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| applicationid   | int(11)      | NO   | PRI | NULL    |       |
+| applicationdate | varchar(30)  | YES  |     | NULL    |       |
+| name            | varchar(30)  | YES  |     | NULL    |       |
+| prn             | int(11)      | YES  |     | NULL    |       |
+| branch          | varchar(30)  | YES  |     | NULL    |       |
+| contact         | bigint(20)   | YES  |     | NULL    |       |
+| email           | varchar(30)  | YES  |     | NULL    |       |
+| leavetype       | varchar(30)  | YES  |     | NULL    |       |
+| leavefrom       | varchar(30)  | YES  |     | NULL    |       |
+| leaveto         | varchar(30)  | YES  |     | NULL    |       |
+| reason          | varchar(150) | YES  |     | NULL    |       |
+| status          | varchar(30)  | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+12 rows in set (0.02 sec)
+
+--->now type show tables to see your tables
+
+mysql> show tables;
++----------------------+
+| Tables_in_studentapp |
++----------------------+
+| collage              |
+| hod                  |
+| leaveapplications    |
+| student              |
++----------------------+
+4 rows in set (0.03 sec)
+
+--->here college is a table created for store collage login details but this is optional 
+--->this project need only three tables 
