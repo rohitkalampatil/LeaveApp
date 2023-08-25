@@ -17,6 +17,8 @@
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String hodname = (String) session.getAttribute("hodname");
+                String branch = (String) session.getAttribute("branch");
+
                 int prn = 0, rollno = 0, c = 0;
                 Statement st = null;
                 Connection c1 = null;
@@ -26,10 +28,10 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                     st = c1.createStatement();
-                    q = "select count(applicationid) from leaveapplications where status='pending'";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("count(applicationid)");
+                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='" + branch + "'";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("count(applicationid)");
                 } catch (Exception e) {
                 }
         %>
@@ -63,7 +65,7 @@
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <%= // hod name appears dynamicaly
-                                                hodname%>
+                                        hodname%>
                             </p>
                         </div>
                         <ul class="py-1" role="none">

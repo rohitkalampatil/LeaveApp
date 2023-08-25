@@ -19,6 +19,7 @@
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String hodname = (String) session.getAttribute("hodname");
+                String branch = (String) session.getAttribute("branch");
 
                 int c = 0;
                 Statement st = null;
@@ -28,7 +29,7 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                     st = c1.createStatement();
-                    q = "select count(applicationid) from leaveapplications where status='pending'";
+                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='"+branch+"'";
                     ResultSet r = st.executeQuery(q);
                     r.next();
                     c = r.getInt("count(applicationid)");
