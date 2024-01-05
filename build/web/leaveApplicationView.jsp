@@ -15,6 +15,9 @@
         <%
             // can not store user data on this page ie to prevent back after logout
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            if (session.getAttribute("userid") == null) {
+                response.sendRedirect("hodlogin.jsp");
+            }else{ 
         %>
         <header>
             <nav class="fixed px-4 lg:px-6 py-2.5 top-0 z-50 w-full bg-white shadow border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -128,4 +131,5 @@
             </div>
         </div>    
     </body>
+    <%}%>
 </html>
