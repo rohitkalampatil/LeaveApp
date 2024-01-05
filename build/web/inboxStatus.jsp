@@ -28,7 +28,7 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                     st = c1.createStatement();
-                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='"+branch+"'";
+                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='" + branch + "'";
                     ResultSet r = st.executeQuery(q);
                     r.next();
                     c = r.getInt("count(applicationid)");
@@ -66,7 +66,7 @@
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <%= // hod name appears dynamicaly
-                                                hodname%>
+                                        hodname%>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -160,7 +160,7 @@
             <div class="p-4 border-2  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <div class=" flex items-center mb-4 justify-between">
-                       <div class="relative z-0  group"> 
+                        <div class="relative z-0  group"> 
                             <div class=" bg-white dark:bg-gray-900">
                                 <label for="table-search" class="sr-only">Search</label>
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -168,7 +168,7 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
                                 </div>
-                                <input type="text" id="table-search" class=" w-32 p-2 pl-8  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search">
+                                <input type="text" id="searchInput" class=" w-32 p-2 pl-8  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search">
                             </div>
                         </div>
 
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="dataTable">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -210,7 +210,7 @@
                             <%
                                 try {
                                     String status = request.getParameter("status");
-                                    q = "select * from leaveapplications where branch='" + branch + "' and status='"+status+"';";
+                                    q = "select * from leaveapplications where branch='" + branch + "' and status='" + status + "';";
                                     ResultSet r = st.executeQuery(q);
                                     while (r.next()) {
                             %>
@@ -259,6 +259,27 @@
                             %>
                         </tbody>
                     </table>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const searchInput = document.getElementById("searchInput");
+                            const dataTable = document.getElementById("dataTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+                            searchInput.addEventListener("keyup", function () {
+                                const searchValue = searchInput.value.toLowerCase();
+
+                                for (let i = 0; i < dataTable.length; i++) {
+                                    const rowData = dataTable[i].textContent.toLowerCase();
+
+                                    if (rowData.includes(searchValue)) {
+                                        dataTable[i].style.display = "";
+                                    } else {
+                                        dataTable[i].style.display = "none";
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+
                 </div>
             </div>
         </div>
@@ -266,4 +287,5 @@
         <%    }
         %>
     </body>
+
 </html>
