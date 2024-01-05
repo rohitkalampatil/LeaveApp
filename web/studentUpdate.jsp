@@ -18,24 +18,28 @@
                 response.sendRedirect("hodlogin.jsp");
             } else {
                 String hodname = (String) session.getAttribute("hodname");
-        %>  
-        <%! int prn = 0, rollno = 0, c = 0;
-        %>  
-        <%  Statement st = null;
-            Connection c1 = null;
-            String q = "";
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                st = c1.createStatement();
-                q = "select max(applicationid) from leaveapplications;";
-                ResultSet r = st.executeQuery(q);
-                r.next();
-                c = r.getInt("max(applicationid)");
-            } catch (Exception e) {
-            }
+                String branch = (String) session.getAttribute("branch");
+
+                int c = 0;
+
+                Statement st = null;
+                Connection c1 = null;
+                String q = "";
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
+                    st = c1.createStatement();
+                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='" + branch + "'";
+                    ResultSet r = st.executeQuery(q);
+                    r.next();
+                    c = r.getInt("count(applicationid)");
+
+                } catch (Exception e) {
+                    out.print(e);
+                }
         %>
-        <%-- ----------------------- Navigationn Bar ---------------------------------%>
+
+        <%-- --------------------- Navigationn Bar ---------------------------------%>
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
@@ -65,7 +69,7 @@
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <%= // hod name appears dynamicaly
-                                                hodname%>
+                                        hodname%>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -153,14 +157,17 @@
         </aside>
         <div id="dashboard" class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+
                 <%-- /////////////////    Updation Form    ////////////////////--%>
+
                 <form method="POST" action="UpdateStudent">
                     <%
-                        String sname = "", branch = "", year = "", email = "";
-                        String sub1 = "", sub2 = "";
-                        long contact = 0;
-                        int rollno = 0;
                         try {
+                            String sname = "", stdbranch = "", year = "", email = "";
+                            String sub1 = "", sub2 = "";
+                            long contact = 0;
+                            int rollno = 0;
+                        
                             int prn = 0;
                             if (request.getParameter("update") != null) {
                                 prn = Integer.parseInt(request.getParameter("update"));
@@ -173,7 +180,7 @@
                                 sname = r.getString("name");
                                 rollno = r.getInt("rollno");
                                 contact = r.getLong("contact");
-                                branch = r.getString("branch");
+                                stdbranch = r.getString("branch");
                                 year = r.getString("year");
                                 email = r.getString("semail");
                             }
@@ -185,7 +192,7 @@
                             </a>
                         </div>
                     </div>
-                    <%--------    roll no and prn   -----------%>
+                    <%--------    roll no and prn  branch -----------%>
                     <div class="grid md:grid-cols-3 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
                             <input type="number" name="prn" id="prn" value="<%= prn%>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " readonly="true" />
@@ -196,7 +203,7 @@
                             <label for="rollno" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Roll No</label>
                         </div>
                         <div class="relative z-0 w-full mb-6 group">
-                            <input type="text" name="rollno" id="rollno" value="<%= branch%>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " readonly="true" />
+                            <input type="text" name="stdbranch" id="stdbranch" value="<%= stdbranch%>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " readonly="true" />
                             <label for="rollno" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Branch</label>
                         </div>
                     </div>
@@ -297,6 +304,7 @@
                     %>
 
                 </form>
+
             </div>
         </div>
         <%    }
