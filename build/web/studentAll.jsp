@@ -32,7 +32,7 @@
                     Class.forName("com.mysql.jdbc.Driver");
                     c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
                     st = c1.createStatement();
-                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='"+branch+"'";
+                    q = "select count(applicationid) from leaveapplications where status='pending' and branch='" + branch + "'";
                     ResultSet r = st.executeQuery(q);
                     r.next();
                     c = r.getInt("count(applicationid)");
@@ -69,7 +69,7 @@
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
                                 <%= // hod name appears dynamicaly
-                                                hodname%>
+                                        hodname%>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -167,10 +167,10 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </div>
-                            <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+                            <input type="text" id="searchInput" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
                         </div>
                     </div>
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table id="dataTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
 
@@ -250,6 +250,26 @@
                             %>
                         </tbody>
                     </table>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const searchInput = document.getElementById("searchInput");
+                            const dataTable = document.getElementById("dataTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+                            searchInput.addEventListener("keyup", function () {
+                                const searchValue = searchInput.value.toLowerCase();
+
+                                for (let i = 0; i < dataTable.length; i++) {
+                                    const rowData = dataTable[i].textContent.toLowerCase();
+
+                                    if (rowData.includes(searchValue)) {
+                                        dataTable[i].style.display = "";
+                                    } else {
+                                        dataTable[i].style.display = "none";
+                                    }
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>
