@@ -247,37 +247,7 @@
                             <input type="submit" id="create" value="Submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"/>
                         </div>
                     </div>
-                    <script>
-                        function validate_password() {
-                            var pass = document.getElementById('pwd1').value;
-                            var confirm_pass = document.getElementById('pwd2').value;
-                            if (pass !== confirm_pass) {
-                                document.getElementById('wrong_pass_alert').style.color = 'red';
-                                document.getElementById('wrong_pass_alert').innerHTML
-                                        = 'Password and Confirm Password Mismatched';
-                                document.getElementById('pass1').style.color = 'red';
-                                document.getElementById('pass2').style.color = 'red';
-                                document.getElementById('pwd1').style.color = 'red';
-                                document.getElementById('pwd2').style.color = 'red';
-                                document.getElementById('pwd1').style.borderBottomColor = 'red';
-                                document.getElementById('pwd2').style.borderBottomColor = 'red';
-                                document.getElementById('create').disabled = true;
-                                document.getElementById('create').style.opacity = (0.4);
-                            } else {
-                                document.getElementById('wrong_pass_alert').style.color = 'green';
-                                document.getElementById('wrong_pass_alert').innerHTML =
-                                        'Password Matched';
-                                document.getElementById('pass1').style.color = 'green';
-                                document.getElementById('pass2').style.color = 'green';
-                                document.getElementById('pwd1').style.color = 'green';
-                                document.getElementById('pwd2').style.color = 'green';
-                                document.getElementById('pwd1').style.borderBottomColor = 'green';
-                                document.getElementById('pwd2').style.borderBottomColor = 'green';
-                                document.getElementById('create').disabled = false;
-                                document.getElementById('create').style.opacity = (1);
-                            }
-                        }
-                    </script>
+                    
                     <input type="hidden" id="successButton" data-modal-toggle="successModal" >
                     <div id="successModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -310,6 +280,26 @@
                 }
                 if (status === "failed") {
                     alert("Failed to add Student");
+                }
+            }
+        </script>
+       <script>
+            function validatePasswords() {
+                var password1 = document.getElementById('pwd1').value;
+                var password2 = document.getElementById('pwd2').value;
+                var pwd1Element = document.getElementById('pwd1');
+                var pwd2Element = document.getElementById('pwd2');
+
+                if (password2 !== "") {
+                    if (password1 !== password2) {
+                        // Passwords do not match
+                        pwd1Element.style.borderBottomColor = 'red';
+                        pwd2Element.style.borderBottomColor = 'red';
+                    } else {
+                        // Passwords match
+                        pwd1Element.style.borderBottomColor = 'green';
+                        pwd2Element.style.borderBottomColor = 'green';
+                    }
                 }
             }
         </script>
