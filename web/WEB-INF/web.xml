@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>Home.html</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>Login</servlet-class>
@@ -40,6 +43,26 @@
         <servlet-name>ChangePassStudent</servlet-name>
         <servlet-class>ChangePassStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserVerify</servlet-name>
+        <servlet-class>com.pkg.email.UserVerify</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>com.pkg.email.VerifyCode</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateNewPass</servlet-name>
+        <servlet-class>UpdateNewPass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserVerify</servlet-name>
+        <url-pattern>/UserVerify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/VerifyCode</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -79,6 +102,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassStudent</servlet-name>
         <url-pattern>/ChangePassStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateNewPass</servlet-name>
+        <url-pattern>/UpdateNewPass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

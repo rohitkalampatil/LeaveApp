@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="flex flex-col items-center justify-center px-2 py-8 mx-auto md:h-screen lg:py-8">
-            <a href="index.html" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <a href="Home.html" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-8 h-8 mr-2" src="logo.png" alt="logo">
                 LeaveApp    
             </a>

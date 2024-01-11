@@ -1,67 +1,58 @@
+package com.pkg.email;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Update extends HttpServlet {
+public class UserVerify extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
 
-            HttpSession s1 = request.getSession(true);
-            String userid = (String) s1.getAttribute("userid");
-
-            String hodname = request.getParameter("hodname");
-            long mobile = Long.parseLong(request.getParameter("mobile"));
-            String email = request.getParameter("email");
-
-            Connection c1 = null;
-            PreparedStatement st = null;
-
+            String userid = request.getParameter("username");
+            String eemail = request.getParameter("useremail");
+            HttpSession session = request.getSession();
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                String q = "update hod set hodname=?,email=?,mobile=? where userid=?";
-                st = c1.prepareStatement(q);
-                st.setString(1, hodname);
-                st.setString(2, email);
-                st.setLong(3, mobile);
-                st.setString(4, userid);
+                try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root")) {
+                    String selectQuery = "select email from hod where userid=?";
+                    try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+                        selectStatement.setString(1, userid);
+                        ResultSet resultSet = selectStatement.executeQuery();
+                        if (resultSet.next()) {
 
-                int r = st.executeUpdate();
+                            if (eemail.equals(resultSet.getString("email"))) {
 
-                if (r > 0) {
+                                SendEmail sm = new SendEmail();
+                                String code = sm.getRandom();
+                                User user = new User(userid, eemail, code);
+                                boolean test = sm.sendEmail(user);
+                                if (test) {
+                                    session.setAttribute("userid",userid);
+                                    session.setAttribute("authcode", user);
+                                    response.sendRedirect("Verify.jsp");
+                                }
 
-                    q = "select hodname,userid,branch,email,mobile from hod where userid=?";
-                    st = c1.prepareStatement(q);
-                    st.setString(1, userid);
-                    ResultSet rr = st.executeQuery();
-                    if (rr.next()) {
-                        hodname = rr.getString("hodname");
-                        s1.setAttribute("hodname", hodname);
-                        s1.setAttribute("status", "success");
-                        c1.close();
-                        response.sendRedirect("hodProfile.jsp");
+                            } else {
+                                session.setAttribute("sts", "F");
+                                response.sendRedirect("forgotPass.jsp");
+                            }
+                        }
                     }
                 }
             } catch (Exception e) {
-                try {
-                    c1.close();
-                    s1.setAttribute("userid", userid);
-                    s1.setAttribute("status", "failedtoinsert2");
-                    response.sendRedirect("hodProfile.jsp");
-                } catch (SQLException ex) {
-                    Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
             }
 
         }
@@ -80,7 +71,6 @@ public class Update extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -95,7 +85,6 @@ public class Update extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**

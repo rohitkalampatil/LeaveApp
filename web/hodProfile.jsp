@@ -20,8 +20,10 @@
             } else {
                 String userid = (String) session.getAttribute("userid");
                 String hodname = (String) session.getAttribute("hodname");
+                
                 String branch = (String) session.getAttribute("branch");
-
+                String email="";
+                long mobile=0;
                 int c = 0;
                 Statement st = null;
                 Connection c1 = null;
@@ -33,6 +35,12 @@
                     st = c1.createStatement();
                     q = "select count(applicationid) from leaveapplications where status='pending' and branch='"+branch+"'";
                     ResultSet r = st.executeQuery(q);
+                    q="select mobile,email from hod where userid='"+userid+"'";
+                    ResultSet rr = st.executeQuery(q);
+                   if( rr.next()){
+                       email=rr.getString("email");
+                       mobile=rr.getLong("mobile");
+                   }
                     r.next();
                     c = r.getInt("count(applicationid)");
                     c1.close();
@@ -69,9 +77,12 @@
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                         <div class="px-4 py-3" role="none">
+                            <p class="text-lg text-gray-900 dark:text-white" role="none">
+                                <%= hodname.equals("")?"username":hodname%>
+                            </p>
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                <%= // hod name appears dynamicaly
-                                                hodname%>
+                               @<%= // hod name appears dynamicaly
+                                                userid%>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -170,6 +181,14 @@
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                             <input type="text" value="<%= hodname%>" name="hodname" maxlength="30" minlength="3" onkeyup="this.value = this.value.replace(/[^a-zA-Z ]/g, '')" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type your name" required="">
                         </div>
+                        <div class="sm:col-span-2 pb-4">
+                            <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Mobile</label>
+                            <input type="tel"  name="mobile" maxlength="10" value="<%= mobile%>"  onkeyup="this.value = this.value.replace(/[^0-9 ]/g, '')" id="mobile" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="1234567890" required="">
+                        </div>
+                        <div class="sm:col-span-2 pb-4">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                            <input type="email"  name="email" value="<%= email%>" maxlength="40" minlength="3"  id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="demo@gmail.com" required="">
+                        </div>
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 pb-4">
                             <div class="w-full">
                                 <label for="userid"   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Userid</label>
@@ -223,6 +242,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>
@@ -236,8 +256,11 @@
                 if (status === "success") {
                     document.getElementById('successButton').click();
                 }
-                if (status === "failed") {
-                    alert("failed to update student");
+                if (status === "failedtoinsert1") {
+                    alert("Email Already Exist You Cannot Change Email");
+                }
+                if (status === "failedtoinsert2") {
+                    alert("2failed to Add Hod Email..\nCant change email");
                 }
             }
         </script>
