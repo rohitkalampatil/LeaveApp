@@ -11,6 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
     </head>
     <body>
+        
         <!-- //////------------------------ Navigation bar  --------------------\\\\\\\ -->
         <header>
             <nav class="bg-white shadow dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -51,7 +52,7 @@
                                 <div class="flex items-start">
                                     <span id="error" class="self-center text-red-600 font-semibold  dark:text-white"><%= session.getAttribute("error") == null ? "" : session.getAttribute("error")%></span>
                                 </div>
-                                <a href="error404.html" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                                <a href="forgotPass.jsp?username=<%= session.getAttribute("userid") == null ? "" : session.getAttribute("userid")%>" class="text-sm font-medium text-primaerror404.htmlry-600 hover:underline dark:text-primary-500">Forgot password?</a>
                             </div>
                             <button type="submit" class="w-full text-blue bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign in</button>
                         </form>

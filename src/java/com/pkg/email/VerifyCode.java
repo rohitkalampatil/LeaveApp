@@ -1,27 +1,35 @@
+package com.pkg.email;
 
+import com.pkg.email.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.sql.*;
 import javax.servlet.http.HttpSession;
 
-public class Logout extends HttpServlet {
+public class VerifyCode extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            HttpSession s1 = request.getSession(false);
-                                 
-            s1.invalidate();
-             
-            response.sendRedirect("Home.html");
+            HttpSession session = request.getSession();
+            session.getAttribute("authcode");
+
+            User user = (User) session.getAttribute("authcode");
+
+            String code = request.getParameter("authcode");
+
+            if (code.equals(user.getCode())) {
+                session.setAttribute("sts", "done");
+                response.sendRedirect("Verify.jsp");
+            } else {
+                session.setAttribute("sts", "fail");
+                response.sendRedirect("Verify.jsp");
+            }
         }
     }
 
