@@ -231,11 +231,11 @@
                     <%--      password     --%>
                     <div class="grid  md:grid-cols-2 md:gap-6">
                         <div class="relative z-0 w-full mb-6 group">
-                            <input type="password" name="pwd1" id="pwd1" maxlength="8" minlength="4"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                            <input type="password" name="pwd1" id="pwd1" maxlength="8" minlength="4" onkeyup="validatePasswords()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                             <label for="pwd1" id="pass1" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
                         </div>
                         <div class="relative z-0 w-full mb-6 group">
-                            <input type="password" name="pwd2" id="pwd2" maxlength="8" minlength="4" onkeyup="validate_password()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                            <input type="password" name="pwd2" id="pwd2" maxlength="8" minlength="4" onkeyup="validatePasswords()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                             <label for="pwd2" id="pass2" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
                         </div>
                     </div>
@@ -247,37 +247,7 @@
                             <input type="submit" id="create" value="Submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"/>
                         </div>
                     </div>
-                    <script>
-                        function validate_password() {
-                            var pass = document.getElementById('pwd1').value;
-                            var confirm_pass = document.getElementById('pwd2').value;
-                            if (pass !== confirm_pass) {
-                                document.getElementById('wrong_pass_alert').style.color = 'red';
-                                document.getElementById('wrong_pass_alert').innerHTML
-                                        = 'Password and Confirm Password Mismatched';
-                                document.getElementById('pass1').style.color = 'red';
-                                document.getElementById('pass2').style.color = 'red';
-                                document.getElementById('pwd1').style.color = 'red';
-                                document.getElementById('pwd2').style.color = 'red';
-                                document.getElementById('pwd1').style.borderBottomColor = 'red';
-                                document.getElementById('pwd2').style.borderBottomColor = 'red';
-                                document.getElementById('create').disabled = true;
-                                document.getElementById('create').style.opacity = (0.4);
-                            } else {
-                                document.getElementById('wrong_pass_alert').style.color = 'green';
-                                document.getElementById('wrong_pass_alert').innerHTML =
-                                        'Password Matched';
-                                document.getElementById('pass1').style.color = 'green';
-                                document.getElementById('pass2').style.color = 'green';
-                                document.getElementById('pwd1').style.color = 'green';
-                                document.getElementById('pwd2').style.color = 'green';
-                                document.getElementById('pwd1').style.borderBottomColor = 'green';
-                                document.getElementById('pwd2').style.borderBottomColor = 'green';
-                                document.getElementById('create').disabled = false;
-                                document.getElementById('create').style.opacity = (1);
-                            }
-                        }
-                    </script>
+                    
                     <input type="hidden" id="successButton" data-modal-toggle="successModal" >
                     <div id="successModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -310,6 +280,26 @@
                 }
                 if (status === "failed") {
                     alert("Failed to add Student");
+                }
+            }
+        </script>
+       <script>
+            function validatePasswords() {
+                var password1 = document.getElementById('pwd1').value;
+                var password2 = document.getElementById('pwd2').value;
+                var pwd1Element = document.getElementById('pwd1');
+                var pwd2Element = document.getElementById('pwd2');
+
+                if (password2 !== "") {
+                    if (password1 !== password2) {
+                        // Passwords do not match
+                        pwd1Element.style.borderBottomColor = 'red';
+                        pwd2Element.style.borderBottomColor = 'red';
+                    } else {
+                        // Passwords match
+                        pwd1Element.style.borderBottomColor = 'green';
+                        pwd2Element.style.borderBottomColor = 'green';
+                    }
                 }
             }
         </script>

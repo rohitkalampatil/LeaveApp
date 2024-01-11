@@ -48,7 +48,9 @@ public class ChangePassHod extends HttpServlet {
                                 if (rr > 0) {
                                     c1.close();
                                     s1.setAttribute("status", "success");
+                                    
                                     response.sendRedirect("hodChangepass.jsp");
+                                   
                                 }
                             } else {
                                 s1.setAttribute("status", "failed");
@@ -68,7 +70,7 @@ public class ChangePassHod extends HttpServlet {
                 }
             } catch (Exception e) {
                 s1.setAttribute("status", "failed");
-                s1.setAttribute("erroralert", "To many try,You were logged out");
+
                 response.sendRedirect("hodlogin.jsp");
             }
 

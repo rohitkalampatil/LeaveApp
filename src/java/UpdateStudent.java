@@ -54,15 +54,7 @@ public class UpdateStudent extends HttpServlet {
                     s1.setAttribute("status", "success");
                     s1.setAttribute("prn", prn);
                     response.sendRedirect("studentUpdate.jsp");
-                    // student record is updating but after update
-                    // we cannote see the update again throws exception null
-                    //  cause we passing prn value after clicking update link all student section 
-                    //   after getting update from updatestudent javafile 
-                    // value of prn become null and hese we seeing only dashboard
-                   
-                    /*request.setAttribute("status", "success");
-                    rd = request.getRequestDispatcher("/studentUpdate.jsp");
-                    rd.forward(request, response);*/
+
                 } else {
                 //closing connection before Redirecting     
                     c1.close();
@@ -70,9 +62,7 @@ public class UpdateStudent extends HttpServlet {
                     s1.setAttribute("status", "failed");
                     s1.setAttribute("prn", prn);
                     response.sendRedirect("studentUpdate.jsp");
-                    /*request.setAttribute("status", "failed");
-                    rd = request.getRequestDispatcher("/studentUpdate.jsp");
-                    rd.forward(request, response);*/
+
                 }
 
             } catch (Exception e) {

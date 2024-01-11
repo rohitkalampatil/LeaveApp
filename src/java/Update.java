@@ -21,7 +21,8 @@ public class Update extends HttpServlet {
             String userid = (String) s1.getAttribute("userid");
 
             String hodname = request.getParameter("hodname");
-            String branch = request.getParameter("branch");
+            long mobile = Long.parseLong(request.getParameter("mobile"));
+            String email = request.getParameter("email");
 
             Connection c1 = null;
             PreparedStatement st = null;
@@ -29,44 +30,34 @@ public class Update extends HttpServlet {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 c1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/studentapp", "root", "root");
-                String q = "update hod set hodname=?,branch=? where userid=?";
+                String q = "update hod set hodname=?,email=?,mobile=? where userid=?";
                 st = c1.prepareStatement(q);
                 st.setString(1, hodname);
-                st.setString(2, branch);
-                st.setString(3, userid);
+                st.setString(2, email);
+                st.setLong(3, mobile);
+                st.setString(4, userid);
+
                 int r = st.executeUpdate();
 
                 if (r > 0) {
-                    out.print("<br>updated success");
-                    q = "select hodname,userid,branch from hod where userid=?";
+
+                    q = "select hodname,userid,branch,email,mobile from hod where userid=?";
                     st = c1.prepareStatement(q);
                     st.setString(1, userid);
-
                     ResultSet rr = st.executeQuery();
                     if (rr.next()) {
-                        userid = rr.getString("userid");
                         hodname = rr.getString("hodname");
-                        branch = rr.getString("branch");
-                        s1.setAttribute("userid", userid);
-                        s1.setAttribute("branch", branch);
                         s1.setAttribute("hodname", hodname);
                         s1.setAttribute("status", "success");
                         c1.close();
                         response.sendRedirect("hodProfile.jsp");
                     }
-
-                } else {
-                    c1.close();
-                    s1.setAttribute("userid", userid);
-                    s1.setAttribute("status", "failed");
-                    response.sendRedirect("hodProfile.jsp");
                 }
-
             } catch (Exception e) {
                 try {
                     c1.close();
                     s1.setAttribute("userid", userid);
-                    s1.setAttribute("status", "failed");
+                    s1.setAttribute("status", "failedtoinsert2");
                     response.sendRedirect("hodProfile.jsp");
                 } catch (SQLException ex) {
                     Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
