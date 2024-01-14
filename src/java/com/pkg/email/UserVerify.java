@@ -22,6 +22,7 @@ public class UserVerify extends HttpServlet {
 
             String userid = request.getParameter("username");
             String eemail = request.getParameter("useremail");
+
             HttpSession session = request.getSession();
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +40,7 @@ public class UserVerify extends HttpServlet {
                                 User user = new User(userid, eemail, code);
                                 boolean test = sm.sendEmail(user);
                                 if (test) {
-                                    session.setAttribute("userid",userid);
+                                    session.setAttribute("username", userid);
                                     session.setAttribute("authcode", user);
                                     response.sendRedirect("Verify.jsp");
                                 }
@@ -48,8 +49,12 @@ public class UserVerify extends HttpServlet {
                                 session.setAttribute("sts", "F");
                                 response.sendRedirect("forgotPass.jsp");
                             }
+                        } else {
+                            session.setAttribute("sts", "FU");
+                            response.sendRedirect("forgotPass.jsp");
                         }
                     }
+
                 }
             } catch (Exception e) {
 

@@ -55,12 +55,7 @@ public class RegisterStudent extends HttpServlet {
                     HttpSession s1 = request.getSession(true);
                     s1.setAttribute("status", "success");
                     response.sendRedirect("studentRegister.jsp");
-                   
-                    // using RequestDispatcher but RequestDispatcher might cause Exception
-                   /* request.setAttribute("status","success");
-                    rd = request.getRequestDispatcher("/studentRegister.jsp");
-                    rd.forward(request, response);*/
-                    //c1.close();
+
                 } 
                 c1.close();
             } catch (Exception e) {

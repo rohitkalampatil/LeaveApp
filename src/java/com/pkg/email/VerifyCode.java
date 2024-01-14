@@ -1,6 +1,5 @@
 package com.pkg.email;
 
-import com.pkg.email.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,6 +23,8 @@ public class VerifyCode extends HttpServlet {
             String code = request.getParameter("authcode");
 
             if (code.equals(user.getCode())) {
+                //set codeequals to empty
+
                 session.setAttribute("sts", "done");
                 response.sendRedirect("Verify.jsp");
             } else {

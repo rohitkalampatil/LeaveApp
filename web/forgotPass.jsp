@@ -89,6 +89,10 @@
                  
                     alert("Wrong email");       
                 }
+                if (status === "FU") {
+                 
+                    alert("Wrong userid");       
+                }
                 
             }
         </script>
