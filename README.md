@@ -5,7 +5,7 @@ LeaveApp is a web application designed to streamline the leave request process w
 
 A big thanks to the contributors who have helped make LeaveApp better!
 
-- [John Doe](https://github.com/RohitKalam)
+- [Rohit Kalam](https://github.com/RohitKalam)
 
 
 If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md).
