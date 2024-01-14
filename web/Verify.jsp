@@ -39,7 +39,7 @@
         <%  //   no chache stored, page will not display after logout
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
-            if (session.getAttribute("userid") == null || session.getAttribute("authcode") == null) {
+            if (session.getAttribute("username") == null || session.getAttribute("authcode") == null) {
                 //session.invalidate();
                 response.sendRedirect("hodlogin.jsp");
             }%>

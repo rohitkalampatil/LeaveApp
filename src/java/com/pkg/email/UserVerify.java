@@ -40,7 +40,7 @@ public class UserVerify extends HttpServlet {
                                 User user = new User(userid, eemail, code);
                                 boolean test = sm.sendEmail(user);
                                 if (test) {
-                                    session.setAttribute("userid", userid);
+                                    session.setAttribute("username", userid);
                                     session.setAttribute("authcode", user);
                                     response.sendRedirect("Verify.jsp");
                                 }

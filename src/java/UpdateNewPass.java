@@ -21,7 +21,7 @@ public class UpdateNewPass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userid"); // Assuming the session attribute is "userId"
+        String userId = (String) session.getAttribute("username"); // Assuming the session attribute is "userId"
 
         if (userId != null) {
             String newPassword = request.getParameter("pwd1");
