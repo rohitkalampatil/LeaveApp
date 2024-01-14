@@ -28,14 +28,14 @@ LeaveApp is a web application designed to streamline the leave request process w
 ### Instructions
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/LeaveApp.git
+    git clone https://github.com/rohitkalampatil/LeaveApp.git
     cd LeaveApp
     ```
 
 2. Open the project in NetBeans 8.2.
 
 3. Set up the MySQL database:
-   - Create a new database and execute the SQL script provided in the `database_script.sql` file.
+   - Create a new database and execute the SQL script provided in the `Database_Script.sql` file.
 
 4. Configure database connection:
    - Open `src/java/util/DatabaseUtil.java` and update the database connection parameters.
