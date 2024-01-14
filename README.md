@@ -1,6 +1,14 @@
 # LeaveApp - College Leave Management System
 
 LeaveApp is a web application designed to streamline the leave request process within college departments. It consists of two modules - one for students and another for the Head of the Department (HOD). The application allows HODs to manage students, handle leave requests, and provides students with a platform to submit and track their leave applications.
+## Contributors
+
+A big thanks to the contributors who have helped make LeaveApp better!
+
+- [John Doe](https://github.com/johndoe)
+- [Jane Smith](https://github.com/janesmith)
+
+If you'd like to contribute, please follow our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## Features
 
